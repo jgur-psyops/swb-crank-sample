@@ -3,7 +3,13 @@ use std::str::FromStr;
 
 use solana_client::{nonblocking::rpc_client::RpcClient, rpc_config::RpcSimulateTransactionConfig};
 use solana_sdk::{
-    commitment_config::CommitmentConfig, compute_budget::ComputeBudgetInstruction, instruction::Instruction, message::{v0, VersionedMessage}, pubkey::Pubkey, signature::{read_keypair_file, Keypair, Signer}, transaction::VersionedTransaction
+    commitment_config::CommitmentConfig,
+    compute_budget::ComputeBudgetInstruction,
+    instruction::Instruction,
+    message::{VersionedMessage, v0},
+    pubkey::Pubkey,
+    signature::{Keypair, Signer, read_keypair_file},
+    transaction::VersionedTransaction,
 };
 
 use switchboard_on_demand_client::{
@@ -45,7 +51,7 @@ async fn main() -> Result<()> {
             payer: payer.pubkey(),
             gateway: gateway.clone(),
             crossbar: Some(crossbar),
-            num_signatures: Some(8),
+            num_signatures: Some(1),
             debug: Some(false),
         },
     )
@@ -53,8 +59,8 @@ async fn main() -> Result<()> {
 
     let latest_blockhash = client.get_latest_blockhash().await?;
     let compute_ixes = vec![
-        ComputeBudgetInstruction::set_compute_unit_limit(1_200_000), // try 1.0–1.3M
-        ComputeBudgetInstruction::set_compute_unit_price(5_000), // 5k µ-lamports/CU = 0.005 lamports/CU
+        ComputeBudgetInstruction::set_compute_unit_limit(1_200_000),
+        ComputeBudgetInstruction::set_compute_unit_price(5_000),
     ];
 
     let mut ixs: Vec<Instruction> = compute_ixes;
