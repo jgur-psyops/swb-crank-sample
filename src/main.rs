@@ -18,7 +18,13 @@ use switchboard_on_demand_client::{
     pull_feed::{FetchUpdateParams, PullFeed, SbContext},
 };
 
-const FEED_PUBKEY: &str = "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW";
+// const FEED_PUBKEY: &str = "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW"; // SOL
+// const FEED_PUBKEY: &str = "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v"; // LST
+const FEED_PUBKEY: &str = "5htZ4vPKPjAEg8EJv6JHcaCetMM4XehZo8znQvrp6Ur3"; // JITOSOL
+// const FEED_PUBKEY: &str = "7YDhgtpNLenb4dSf77guacM7diov2obqzyLz4NNYbjWg"; // TNSR
+// const FEED_PUBKEY: &str = "6aY5Qx4k22Kws22zmTEoiEesx7XzfxHsAs26ArgXed9D"; // PRCL
+// const FEED_PUBKEY: &str = "4VmpF3ndsZiXn89PMcg7S9LcuXHsPY4n1XC7fvgrJTva"; // MOBILE
+
 
 #[tokio::main]
 async fn main() -> Result<()> {
