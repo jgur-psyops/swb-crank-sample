@@ -1,14 +1,9 @@
 use anyhow::Result;
 use std::str::FromStr;
 
-use solana_client::nonblocking::rpc_client::RpcClient;
+use solana_client::{nonblocking::rpc_client::RpcClient, rpc_config::RpcSimulateTransactionConfig};
 use solana_sdk::{
-    commitment_config::CommitmentConfig,
-    instruction::Instruction,
-    message::{VersionedMessage, v0},
-    pubkey::Pubkey,
-    signature::{Keypair, Signer, read_keypair_file},
-    transaction::VersionedTransaction,
+    commitment_config::CommitmentConfig, compute_budget::ComputeBudgetInstruction, instruction::Instruction, message::{v0, VersionedMessage}, pubkey::Pubkey, signature::{read_keypair_file, Keypair, Signer}, transaction::VersionedTransaction
 };
 
 use switchboard_on_demand_client::{
@@ -57,13 +52,44 @@ async fn main() -> Result<()> {
     .await?;
 
     let latest_blockhash = client.get_latest_blockhash().await?;
-    let ixs: Vec<Instruction> = vec![update_ix];
+    let compute_ixes = vec![
+        ComputeBudgetInstruction::set_compute_unit_limit(1_200_000), // try 1.0–1.3M
+        ComputeBudgetInstruction::set_compute_unit_price(5_000), // 5k µ-lamports/CU = 0.005 lamports/CU
+    ];
+
+    let mut ixs: Vec<Instruction> = compute_ixes;
+    ixs.push(update_ix);
 
     let v0_msg = v0::Message::try_compile(&payer.pubkey(), &ixs, &luts, latest_blockhash)?;
 
     let vtx = VersionedTransaction::try_new(VersionedMessage::V0(v0_msg), &[&payer])?;
+    let sim = client
+        .simulate_transaction_with_config(
+            &vtx,
+            RpcSimulateTransactionConfig {
+                sig_verify: true,
+                replace_recent_blockhash: false,
+                commitment: Some(CommitmentConfig::processed()),
+                encoding: None,
+                accounts: None,
+                min_context_slot: None,
+                inner_instructions: true,
+            },
+        )
+        .await?;
+    if let Some(logs) = sim.value.logs.clone() {
+        println!("--- simulation logs ---");
+        for l in logs {
+            println!("{l}");
+        }
+        println!("-----------------------");
+    }
+    if let Some(err) = sim.value.err.clone() {
+        anyhow::bail!("simulation failed: {err:?}");
+    }
+    // END INSERT —>
+
     let sig = client.send_and_confirm_transaction(&vtx).await?;
     println!("✅ Cranked {feed} -> {sig}");
-
     Ok(())
 }
