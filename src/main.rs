@@ -22,7 +22,7 @@ use switchboard_on_demand_client::{
 
 // ---------- FEEDS AS CONSTANTS ----------
 const FEEDS: &[&str] = &[
-    // "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW", // SOL
+     "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW", // SOL
     // "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v", // LST
     // "5htZ4vPKPjAEg8EJv6JHcaCetMM4XehZo8znQvrp6Ur3", // JITOSOL
     // "7YDhgtpNLenb4dSf77guacM7diov2obqzyLz4NNYbjWg", // TNSR
@@ -30,11 +30,11 @@ const FEEDS: &[&str] = &[
     // "4VmpF3ndsZiXn89PMcg7S9LcuXHsPY4n1XC7fvgrJTva", // MOBILE
 
     // random garbage
-    "A9RnpLxxtAS2TR3HtSMNJfsKpRPvkLbBkGZ6gKziSPLr",
-    "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v",
-    "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW",
-    "5htZ4vPKPjAEg8EJv6JHcaCetMM4XehZo8znQvrp6Ur3",
-    "DMhGWtLAKE5d56WdyHQxqeFncwUeqMEnuC2RvvZfbuur",
+    // "A9RnpLxxtAS2TR3HtSMNJfsKpRPvkLbBkGZ6gKziSPLr",
+    // "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v",
+    // "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW",
+    // "5htZ4vPKPjAEg8EJv6JHcaCetMM4XehZo8znQvrp6Ur3",
+    // "DMhGWtLAKE5d56WdyHQxqeFncwUeqMEnuC2RvvZfbuur",
 ];
 
 #[tokio::main]
