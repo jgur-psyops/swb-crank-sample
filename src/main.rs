@@ -22,14 +22,14 @@ use switchboard_on_demand::client::{
 // ---------- FEEDS AS CONSTANTS ----------
 const FEEDS: &[&str] = &[
     // "4Hmd6PdjVA9auCoScE12iaBogfwS4ZXQ6VZoBeqanwWW", // SOL
-    "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v", // LST
+    // "BWK8Wnybb7rPteNMqJs9uWoqdfYApNym6WgE59BwLe1v", // LST
     // "5htZ4vPKPjAEg8EJv6JHcaCetMM4XehZo8znQvrp6Ur3", // JITOSOL
     // "7YDhgtpNLenb4dSf77guacM7diov2obqzyLz4NNYbjWg", // TNSR
     // "6aY5Qx4k22Kws22zmTEoiEesx7XzfxHsAs26ArgXed9D", // PRCL
     // "4VmpF3ndsZiXn89PMcg7S9LcuXHsPY4n1XC7fvgrJTva", // MOBILE
 
     // random feeds
-    // "BR52MKhuygj4qzAky5DrSViYLjy1hTze5PKhe5yx4qJw", // HYUSD
+    "BR52MKhuygj4qzAky5DrSViYLjy1hTze5PKhe5yx4qJw", // HYUSD
 ];
 
 #[tokio::main]
