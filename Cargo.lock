@@ -6938,6 +6938,7 @@ name = "swbcranksample"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "futures",
  "solana-client",
  "solana-sdk",
  "switchboard-on-demand",
